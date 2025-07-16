@@ -1,0 +1,31 @@
+/* @theme base */
+
+@import 'default';
+/* @import 'uncover'; */
+
+/* Lexend Font */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+:root {
+  font-family: "Lexend", ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol,
+      "Noto Color Emoji";
+  font-weight: initial;
+}
+
+h1{
+  color: #000
+}
+
+footer {
+  /* Unset default placing inherited from the built-in theme */
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+
+  /* Place to right-bottom */
+  left: 30px;
+  bottom: 20px;
+}

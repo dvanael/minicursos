@@ -42,19 +42,19 @@ jobs:
         run: mkdir -p build
 
       - name: Copy images directory (if exists)
-        run: if [[ -d img ]]; then cp -R img build/img; fi
+        run: if [[ -d slides/img ]]; then cp -R slides/img build/img; fi
 
       - name: Marp Build html (build folder)
         uses: docker://marpteam/marp-cli:v4.1.1
         with:
-          args: -I slides/ -o build/
+          args: -I slides/ -o build/ --set-theme slides/themes/base.css
         env:
           MARP_USER: root:root
 
       - name: Marp Build pdf (build folder)
         uses: docker://marpteam/marp-cli:v4.1.1
         with:
-          args: --pdf --pdf-outlines --allow-local-files -I slides/ -o build/
+          args: --pdf --pdf-outlines --allow-local-files -I slides/ -o build/ --set-theme slides/themes/base.css
         env:
           MARP_USER: root:root
 
