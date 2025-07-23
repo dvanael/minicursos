@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Início
+{% endblock title %}
+
+{% block header %}
+    <header>
+        <h1>Início</h1>
+    </header>
+{% endblock header %}
+
+{% block content %}
+    <main>
+        <section>
+            <h2>Links</h2>
+            <ul>
+                <li><a href="{{ url_for('criar_usuario') }}">Criar usuário</a></li>
+                <li><a href="{{ url_for('listar_usuarios') }}">Listar usuário</a></li>
+            </ul>
+        </section>
+    </main>
+{% endblock content %}
