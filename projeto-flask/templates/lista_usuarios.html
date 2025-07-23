@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Lista usuários
+{% endblock title %}
+
+{% block header %}
+    <header>
+        <h1>Lista usuários</h1>
+    </header>
+{% endblock header %}
+
+{% block content %}
+    <main>
+        <section>
+            <h2>Usuários</h2>
+            <a href="{{ url_for('criar_usuario') }}">Criar usuário</a>
+            <ul>
+                {% for usuario in usuarios %}
+                    <li>{{ usuario.nome }} - {{ usuario.idade }}</li>
+                {% endfor %}
+            </ul>
+            </section>
+    </main>
+{% endblock content %}
