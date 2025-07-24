@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Lista Jogos
+{% endblock title %}
+
+{% block header %}
+    <header>
+        <h1>Lista Jogos</h1>
+    </header>
+{% endblock header %}
+
+{% block content %}
+    <main>
+        <section>
+            <h2>Jogos</h2>
+            <ul>
+                {% for jogo in jogos %}
+                    <li>{{ jogo.nome }} - {{ jogo.ano }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+{% endblock content %}

@@ -6,17 +6,22 @@
 
 {% block header %}
     <header>
-        <h1>Início</h1>
+        <h1>Vapor - Catálogo de Jogos Digitais</h1>
     </header>
 {% endblock header %}
 
 {% block content %}
     <main>
         <section>
-            <h2>Links</h2>
+            <h2>Jogos Recentes</h2>
             <ul>
-                <li><a href="{{ url_for('criar_usuario') }}">Criar usuário</a></li>
-                <li><a href="{{ url_for('listar_usuarios') }}">Listar usuário</a></li>
+                {% for jogo in jogos%}
+                    {% if jogo.ano > 2015 %}
+                        <li>
+                            <b>{{ jogo.nome }}</b> - {{ jogo.ano }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </section>
     </main>

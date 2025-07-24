@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Base{% endblock title %}</title>
+    <title>Vapor - {% block title %}Base{% endblock title %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
     {% block header %}
@@ -11,9 +11,17 @@
             <h1>Base</h1>
         </header>
     {% endblock header %}
-    
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Inicio</a></li>
+            <li><a href="{{ url_for('cadastrar_jogo') }}">Cadastrar Jogo</a></li>
+            <li><a href="{{ url_for('listar_jogos') }}">Lista de Jogos</a></li>
+        </ul>
+    </nav>
+
     {% block content %}
-            
+
     {% endblock content %}
 </body>
 </html>
