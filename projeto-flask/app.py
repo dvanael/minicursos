@@ -13,7 +13,7 @@ def index():
 def cadastrar_jogo():
     if request.method == "POST":
         nome = request.form["nome"]
-        ano = request.form["ano"]
+        ano = int(request.form["ano"])
         jogos.append({"nome": nome, "ano": ano})
         return redirect(url_for("listar_jogos"))
     else:

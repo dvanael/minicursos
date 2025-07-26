@@ -26,9 +26,53 @@ style: |
 
 ---
 
-# Slide Teste
+# A Internet
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat tortor eget lacus lacinia lobortis. Mauris rhoncus fermentum elit, id lobortis leo accumsan non.
+A Internet é a rede global que conecta computadores de todo mundo.
+
+Com a internet, as pessoas criaram novos hábitos e demandas.
+
+O desenvolvimento web precisa acompanhar essas demandas.
+
+---
+
+# HTML
+
+*Hypertext Markup Language* é a linguagem utilizada para exibição das páginas web.
+
+O HTML é construído por texto e marcadores (*tags*).
+
+Os navegadores interpretam o código do HTML e exibem os resultados.
+
+---
+
+# Exemplo Básico
+
+```html
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Primeiro Site</title>
+</head>
+
+<body>
+  <h1>Hello, World</h1>
+</body>
+</html>
+```
+
+Acessando o arquivo pelo navegador, é possivel visualizar a página.
+
+---
+
+# CSS
+
+*Cascade Style Sheets* é a linguagem de estilo para páginas web.
+
+CSS determina como os elementos do HTML são renderizados.
+
+---
 
 ```python
 from flask import Flask
