@@ -14,6 +14,10 @@
     <main>
         <section>
             <h2>Jogos</h2>
+            <form action="{{ url_for('listar_jogos') }}" method="get">
+                <input type="text" name="filtro-ano">
+                <button type="submit">Filtrar</button>
+            </form>
             <ul>
                 {% for jogo in jogos %}
                     <li>{{ jogo.nome }} - {{ jogo.ano }}</li>
