@@ -58,6 +58,7 @@ Os navegadores interpretam o código do HTML e exibem os resultados.
 
 <body>
   <h1>Hello, World</h1>
+  <p>Texto muito legal</p>
 </body>
 </html>
 ```
@@ -99,6 +100,94 @@ pip install flask
 # Primeira aplicação
 - Criar arquivo `app.py`
 
+O código pode ser incorporado no HTML, ou exportado de um arquivo externo.
+
+---
+
+## Exemplo. CSS Incorporado
+
+CSS pode ser escrito diretamente no HTML
+
+```html
+<head>
+  <style>
+    body{
+      background-color: grey;
+      font-size: 32px;
+    }
+  </style>
+</head>
+```
+
+Isso pode gerar arquivos com muitas linhas, assim criando um código grande demais.
+
+---
+
+## Exemplo. CSS Exportado
+
+Fazemos um `link` no HTML com o CSS.
+
+```html
+<head>
+    <link rel="stylesheet" href="main.css">
+</head>
+```
+
+Escrevemos o código em um arquivo dedicado.
+
+```css
+body{
+  background-color: grey;
+  font-size: 32px;
+}
+```
+
+Arquivos dedicados para cada linguagem melhoaram a organização do projeto e o torna mais escalavel.
+
+---
+
+# Backend e Frontend
+
+HTML e CSS são reponsaveis apenas pelo visual de páginas web. A aparência e a interface de um sistema são chamados de **frontend**.
+
+O frontend não é lidar com o processamento de dados enviados pelos usuários.
+
+O **backend** roda em um servidor e lida com processamento de dados.
+
+Linguagens usadas: **Python**, Java, PHP, Ruby, etc.
+
+---
+
+# Python
+
+Python é uma liguagem de programação que permite intregação rápida de sistemas.
+
+Possui uma sintáxe simples e fácil de aprender.
+
+## Exemplo
+
+**main.py**
+
+```python
+nome = input("Digite aqui: ")
+print("Hello", nome)
+```
+
+---
+
+# Flask
+
+É um *framework* leve para desenvolvimento web.
+
+Ótimo para aplicações simples e rápidos.
+
+Menos robusto em comparação com outros *frameworks* Python, como o **Django**.
+
+---
+
+## Exemplo
+
+**app.py**
 ```python
 from flask import Flask
 
@@ -107,7 +196,6 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     return "<h1> Hello, world! </h1>"
-
 ```
 ```shell
 flask --app app.py run --debug
@@ -222,3 +310,4 @@ from flask import render_template, url_for
 # Como aprender desenvolvimendo web?
 - Entender a história da web
 - Construir projetos (pode criar coisas que já existem)
+

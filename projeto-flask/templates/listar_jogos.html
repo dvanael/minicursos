@@ -15,8 +15,9 @@
         <section>
             <h2>Jogos</h2>
             <form action="{{ url_for('listar_jogos') }}" method="get">
+                <label for="filtro-ano">Ano de Lançamento</label><br>
                 <input type="text" name="filtro-ano">
-                <button type="submit">Filtrar</button>
+                <input type="submit" value="Filtrar">
             </form>
             <ul>
                 {% for jogo in jogos %}

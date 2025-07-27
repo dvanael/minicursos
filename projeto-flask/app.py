@@ -22,15 +22,11 @@ def cadastrar_jogo():
 
 @app.route("/jogos/")
 def listar_jogos():
-
-    # Filtro por ano
-    filtro_ano = request.args.get('filtro-ano')
+    filtro_ano = request.args.get("filtro-ano")
     if filtro_ano:
         jogos_filtrados = []
         for jogo in jogos:
-            if jogo['ano'] == int(filtro_ano):
+            if jogo["ano"] == int(filtro_ano):
                 jogos_filtrados += [jogo]
         return render_template("listar_jogos.html", jogos=jogos_filtrados)
-        
     return render_template("listar_jogos.html", jogos=jogos)
-

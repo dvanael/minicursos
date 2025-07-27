@@ -12,3 +12,11 @@ body {
 h1, h2, h3 {
   line-height:1.2
 }
+
+input{
+  border: #aaa solid 2px;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  font-size: 16px;
+}
