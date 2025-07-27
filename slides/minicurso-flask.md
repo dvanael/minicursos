@@ -1,6 +1,6 @@
 ---
 marp: true
-size: 16:9
+size: 4:3
 theme: base
 paginate: true
 title: Introdução ao Desenvolvimento Web com Flask
@@ -46,10 +46,10 @@ Os navegadores interpretam o código do HTML e exibem os resultados.
 
 ---
 
-# Exemplo Básico
-
+## Exemplo Básico
+`index.html`
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -72,41 +72,13 @@ Acessando o arquivo pelo navegador, é possivel visualizar a página.
 
 CSS determina como os elementos do HTML são renderizados.
 
----
-# Flask
-[Documentação](https://flask.palletsprojects.com/en/stable/)
-- Framework para aplicações web 
-- Escrito em python
-- Fácil de usar
-
-
----
-# Instalação
-- Criar pasta para projeto
-- Criar ambiente virtual
-```shell
-python -m venv .venv
-```
-- Ativar ambiente virtual
-```shell
-.venv\Scripts\Activate.ps1
-```
-- Instalar o flask
-```shell
-pip install flask
-```
-
----
-# Primeira aplicação
-- Criar arquivo `app.py`
-
 O código pode ser incorporado no HTML, ou exportado de um arquivo externo.
 
 ---
 
 ## Exemplo. CSS Incorporado
 
-CSS pode ser escrito diretamente no HTML
+CSS pode ser escrito diretamente no HTML.
 
 ```html
 <head>
@@ -164,10 +136,7 @@ Python é uma liguagem de programação que permite intregação rápida de sist
 
 Possui uma sintáxe simples e fácil de aprender.
 
-## Exemplo
-
-**main.py**
-
+`main.py`
 ```python
 nome = input("Digite aqui: ")
 print("Hello", nome)
@@ -183,131 +152,446 @@ print("Hello", nome)
 
 Menos robusto em comparação com outros *frameworks* Python, como o **Django**.
 
+> Saiba mais com a [Documentação](https://palletsprojects.com/projects/flask/)
+
 ---
 
-## Exemplo
+## Instalação
 
-**app.py**
+Antes de instalar o Flask, é necessário criar um ambiente virtual.
+
+- Criando ambiente virtual
+```shell
+python -m venv .venv
+```
+- Ativar ambiente virtual
+```shell
+.venv\Scripts\Activate.ps1
+```
+- Instalar o flask
+```shell
+pip install flask
+```
+
+---
+
+## Primeira Aplicação
+
+`app.py`
 ```python
 from flask import Flask
 
 app = Flask(__name__)
 
 @app.route("/")
-def hello_world():
-    return "<h1> Hello, world! </h1>"
-```
-```shell
-flask --app app.py run --debug
+def index():
+    return "Hello, world!"
 ```
 
----
-# Nosso projeto
-Uma aplicação de jogos digitais
-- Cadastrar jogos
-- Listar jogos
-- Filtrar busca de jogos
+Execute o app com `flask run`, e acesse em [localhost:5000](http://localhost:5000)
 
 ---
-# Templates
-- Criar pasta `templates` na raiz do projeto
-- Criar `base.html`
-- Criar `index.html`
-- Criar pasta `static` na raiz do projeto
-- Criar pasta `css` na pasta `static`
-- Criar `main.css`
 
----
-- No arquivo `base.html`
+## Templates
+
+São modelos que facilitam a criação da interface.
+Flask usa a template engine [Jinja](https://palletsprojects.com/projects/jinja).
+No projeto, os arquivos ficam na pasta `templates/`
+
+`templates/index.html`
 ```html
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Base{% endblock title %}</title>
+    <title>Vapor</title>
 </head>
 <body>
-    {% block header %}
-        <header>
-            <h1>Base</h1>
-        </header>
-    {% endblock header %}
-    
-    {% block content %}
-            
-    {% endblock content %}
+    <h1>Vapor - Catálogo de Jogos</h1>
 </body>
 </html>
 ```
 
 ---
-- No `index.html`
+
+Para fazer o Flask renderizar templates, precisamos importar a funcão `render_template`.
+
+Indicamos qual template será renderizado pelo nome do arquivo.
+
+`app.py`
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+```
+
+> O HTML deve estar na pasta `templates/`
+
+---
+
+### Herança de Templates
+
+É possível criar um modelo base de HTML e reutilizá-lo.
+
+`templates/base.html`
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vapor - {% block title %}{% endblock title %}</title>
+</head>
+<body>
+    {% block header %}{% endblock header %}
+
+    {% block content %}{% endblock content %}
+</body>
+</html>
+```
+
+---
+
+`templates/index.html`
 ```html
 {% extends 'base.html' %}
 
-{% block title %}
-    Início
-{% endblock title %}
+{% block title %} Início {% endblock title %}
 
 {% block header %}
-    <header>
-        <h1>Início</h1>
-    </header>
+  <header>
+      <h1>Vapor - Catálogo de Jogos</h1>
+  </header>
 {% endblock header %}
 
 {% block content %}
-    <main>
-        <section>
-            <h2>Links</h2>
-            <ul>
-                <li><a href="{{ url_for('criar_usuario') }}">Criar usuário</a></li>
-                <li><a href="{{ url_for('listar_usuarios') }}">Listar usuário</a></li>
-            </ul>
-        </section>
-    </main>
+  <main>
+    <section>
+      <h2>Jogos Recentes</h2>
+    </section>
+  </main>
 {% endblock content %}
 ```
 
 ---
-- No `main.css`
+
+### Variáveis
+
+Com Flask, podemos enviar valores de variáveis para os templates.
+
+`app.py`
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    jogo = {"nome": "Stardew Valley", "ano": 2016}
+    return render_template("index.html", variavel=jogo)
+```
+
+---
+
+`index.html`
+```html
+{% block content %}
+  <main>
+    <section>
+      <h2>Jogos Recentes</h2>
+      <p>{{variavel.nome}} - {{variavel.ano}}</p>
+    </section>
+  </main>
+{% endblock content %}
+```
+
+Dessa forma, enviamos dados do backend para o frontend da nossa aplicação.
+
+---
+
+### Laços de Repetição
+
+Criar conteúdos que se repetem extensivamente também é mais fácil.
+
+Vamos criar uma simulação de banco de dados.
+
+
+`database.py`
+```python
+# Simulação de Banco de Dados
+jogos = [
+    {"nome": "Stardew Valley", "ano": 2016},
+    {"nome": "Terraria", "ano": 2015},
+    {"nome": "Undertale", "ano": 2011},
+]
+```
+
+---
+
+Uma nova função e um novo template.
+
+`app.py`
+```python
+from database import jogos
+
+@app.route("/jogos/")
+def listar_jogos():
+    return render_template("listar_jogos.html", jogos=jogos)
+```
+
+Com uma **lista** podemos criar um laço de repetição no template.
+
+---
+
+`listar_jogos.html`
+```html
+{% extends 'base.html' %}
+
+{% block title %} Lista Jogos {% endblock title %}
+
+{% block header %}
+  <header>
+    <h1>Lista de Jogos</h1>
+  </header>
+{% endblock header %}
+
+{% block content %}
+  <main>
+    <section>
+      <h2>Jogos</h2>
+      <ul>
+        {% for jogo in jogos %}
+          <li>{{ jogo.nome }} - {{ jogo.ano }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </main>
+{% endblock content %}
+```
+
+---
+
+### Condicionais
+
+Podemos criar condições para definir o que será exibido no template.
+
+`app.py`
+```python
+@app.route("/")
+def index():
+    return render_template("index.html", jogos=jogos)
+```
+
+> Adicionando `jogos` no index.
+
+---
+
+`index.html`
+```html
+{% block content %}
+  <main>
+    <section>
+      <h2>Jogos Recentes</h2>
+      <ul>
+
+        {% for jogo in jogos %}
+          {% if jogo.ano > 2015 %}
+            <li>
+              <b>{{ jogo.nome }}</b> - {{ jogo.ano }}
+            </li>
+          {% endif %}
+        {% endfor %}
+
+      </ul>
+    </section>
+  </main>
+{% endblock content %}
+```
+
+---
+
+### Formulários
+
+Envio de dados entre frontend e backend é uma das interações mais comuns.
+Podem ser feitas com formulários.
+
+`cadastrar_jogo.html`
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+  <main>
+    <section>
+      <h2>Formulário de Cadastro</h2>
+      <form action="{{ url_for('cadastrar_jogo') }}" method="POST">
+        <input type="text" name="nome" placeholder="Nome">
+        <input type="number" name="ano" placeholder="Ano de Lançamento">
+        <input type="submit" value="Enviar">
+      </form>
+    </section>
+  </main>
+{% endblock content %}
+```
+
+---
+
+Após o envio do forms no HTML, tratamos os dados e redirecinamos o usuário para a listagem.
+
+Usamos as funções `url_for` e `redirect`.
+
+`app.py`
+```python
+from flask import Flask, render_template, request, url_for, redirect
+
+@app.route("/jogos/criar/", methods=["GET", "POST"])
+def cadastrar_jogo():
+    if request.method == "POST":
+        nome = request.form["nome"]
+        ano = request.form["ano"]
+        jogos.append({"nome": nome, "ano": int(ano)})
+        return redirect(url_for("listar_jogos"))
+    else:
+        return render_template("cadastrar_jogo.html")
+```
+
+---
+
+### Arquivos Estáticos
+
+Para implementar CSS e outros arquivos no Flask, adicionamos eles ao diretório `static/`.
+
+`static/css/main.css`
 ```css
 body {
-  font-family: "Noto Sans";
-  margin: 40px auto;
   max-width: 650px;
-  line-height: 1.6;
+  margin: 40px auto;
+  padding: 0 10px;
   font-size: 18px;
+  line-height: 1.6;
+  font-family: "Noto Sans";
   color: #333;
-  padding: 0 10px
 }
-
 h1, h2, h3 {
-  line-height:1.2
+  line-height: 1.2;
 }
 ```
 
 ---
-# Construindo a aplicação
-- Criar as rotas das páginas de listar e cadastrar
+
+Usamos `url_for` no template, de `static` e o nome do arquivo para linkar.
+
+`base.html`
+```html
+<head>
+  . . .
+
+  <link rel="stylesheet"
+   href="{{ url_for('static', filename='css/main.css') }}"
+  >
+</head>
+```
+
+> Note que é usado **aspas duplas** fora e **aspas simples** por dentro.
+
+---
+
+# Incrementando o Projeto
+
+## Navegação
+
+Juntando a tag de âncora `<a>` e o `url_for`.
+
+`base.html`
+```html
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('cadastrar_jogo') }}">Cadastrar Jogo</a></li>
+      <li><a href="{{ url_for('listar_jogos') }}">Lista de Jogos</a></li>
+    </ul>
+  </nav>
+```
+
+---
+
+## Filtro de Busca
+
+Criamos um `forms` com método GET para enviar argumentos à url.
+
+`listar_jogos.html`
+```html
+  <h2>Jogos</h2>
+  <form action="{{ url_for('listar_jogos') }}" method="GET">
+    <label for="filtro-ano">Ano de Lançamento</label><br>
+    <input type="text" name="filtro-ano">
+    <input type="submit" value="Filtrar">
+  </form>
+```
+> Perceba o `/?filtro-ano=` na url local.
+
+---
+
+Acessamos os argumentos `args` da url e fazemos uma lista filtrada com base nisso.
+
+`app.py`
 ```python
-from flask import render_template, url_for
-```
+@app.route("/jogos/")
+def listar_jogos():
+    filtro_ano = request.args.get("filtro-ano")
+    if filtro_ano:
+        jogos_filtrados = []
+        for jogo in jogos:
+            if jogo["ano"] == int(filtro_ano):
+                jogos_filtrados += [jogo]
+        return render_template("listar_jogos.html", jogos=jogos_filtrados)
+    return render_template("listar_jogos.html", jogos=jogos)
 
 ```
-@app.route("<URL>", methods=["GET", "POST"])
-```
-
-- Criar banco de dados (não é um banco de verdade)
 
 ---
-- Criar listagem dos jogos
-- Criar formulário de cadastro de jogos
-- Criar filtragem de busca
 
+## Formulários
+
+Estilizando os formulários.
+
+`cadastra_jogos.html`
+```html
+  <form action="{{ url_for('cadastrar_jogo') }}" method="POST">
+    <label for="nome">Nome do Jogo</label><br>
+    <input type="text" name="nome"><br>
+
+    <label for="ano">Ano de Lançamento</label><br>
+    <input type="number" name="ano"><br>
+
+    <input type="submit" value="Enviar">
+  </form>
+```
 
 ---
+
+`main.css`
+```css
+input{
+  border: #aaa solid 2px;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  font-size: 16px;
+}
+```
+
+---
+
 # Como aprender desenvolvimendo web?
+
 - Entender a história da web
 - Construir projetos (pode criar coisas que já existem)
+
+---
+
+# Referências
+
 
