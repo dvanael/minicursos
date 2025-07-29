@@ -26,13 +26,13 @@ style: |
 
 ---
 
-# A Internet
+# Prática do minicurso
 
-A Internet é a rede global que conecta computadores de todo mundo.
+- Construir uma aplicação simples de **catálogo de jogos**;
 
-Com a internet, as pessoas criaram novos hábitos e demandas.
+- Criar interfaces e um pequeno sistema.
 
-O desenvolvimento web precisa acompanhar essas demandas.
+![Vapor Tipográfia](img/vapor-type.svg)
 
 ---
 
@@ -47,12 +47,12 @@ Os navegadores interpretam o código do HTML e exibem os resultados.
 ---
 
 ## Exemplo Básico
-`index.html`
+
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Primeiro Site</title>
 </head>
 
@@ -107,26 +107,13 @@ Fazemos um `link` no HTML com o CSS.
 
 Escrevemos o código em um arquivo dedicado.
 
+`main.css`
 ```css
 body{
-  background-color: grey;
+  background-color: blue;
   font-size: 32px;
 }
 ```
-
-Arquivos dedicados para cada linguagem melhoaram a organização do projeto e o torna mais escalavel.
-
----
-
-# Backend e Frontend
-
-HTML e CSS são reponsaveis apenas pelo visual de páginas web. A aparência e a interface de um sistema são chamados de **frontend**.
-
-O frontend não é lidar com o processamento de dados enviados pelos usuários.
-
-O **backend** roda em um servidor e lida com processamento de dados.
-
-Linguagens usadas: **Python**, Java, PHP, Ruby, etc.
 
 ---
 
@@ -160,15 +147,15 @@ Menos robusto em comparação com outros *frameworks* Python, como o **Django**.
 
 Antes de instalar o Flask, é necessário criar um ambiente virtual.
 
-- Criando ambiente virtual
+- Criar ambiente virtual
 ```shell
-python -m venv .venv
+python -m venv venv
 ```
 - Ativar ambiente virtual
 ```shell
-.venv\Scripts\Activate.ps1
+venv\Scripts\Activate.ps1
 ```
-- Instalar o flask
+- Instalar o Flask
 ```shell
 pip install flask
 ```
@@ -195,8 +182,8 @@ Execute o app com `flask run`, e acesse em [localhost:5000](http://localhost:500
 ## Templates
 
 São modelos que facilitam a criação da interface.
-Flask usa a template engine [Jinja](https://palletsprojects.com/projects/jinja).
-No projeto, os arquivos ficam na pasta `templates/`
+Flask usa a ferramenta de templates [Jinja](https://palletsprojects.com/projects/jinja).
+No projeto, os arquivos ficam na pasta `templates/`.
 
 `templates/index.html`
 ```html
@@ -214,7 +201,7 @@ No projeto, os arquivos ficam na pasta `templates/`
 
 ---
 
-Para fazer o Flask renderizar templates, precisamos importar a funcão `render_template`.
+Para fazer o Flask renderizar templates, precisamos importar a função `render_template`.
 
 Indicamos qual template será renderizado pelo nome do arquivo.
 
@@ -481,7 +468,7 @@ h1, h2, h3 {
 
 ---
 
-Usamos `url_for` no template, de `static` e o nome do arquivo para linkar.
+Usamos `url_for` no template, defimos `static` e o nome do arquivo para linkar.
 
 `base.html`
 ```html
@@ -585,13 +572,22 @@ input{
 
 ---
 
-# Como aprender desenvolvimendo web?
+# Como aprender Desenvolvimento Web?
 
-- Entender a história da web
-- Construir projetos (pode criar coisas que já existem)
+- Buscar informações nas documentações
+- Construir projetos pessoais
+- Cursos voltados para Desenvolvimento de Sistemas
 
 ---
 
 # Referências
 
+Flask Documentation (3.1.x) https://flask.palletsprojects.com/en/stable/
 
+Jinja Documentation (3.1.x) https://jinja.palletsprojects.com/en/stable/
+
+MDN Web Docs | Aprendendo Desenvolvimento Web https://developer.mozilla.org/pt-BR/docs/Learn_web_development
+
+---
+
+<h1 class="title"> OBRIGADO PELA ATENÇÃO! </h1>
