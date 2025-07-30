@@ -263,6 +263,46 @@ def index():
 {% endblock content %}
 ```
 
+
+---
+
+### Arquivos Estáticos
+
+Para implementar CSS e outros arquivos no Flask, adicionamos eles ao diretório `static/`.
+
+`static/css/main.css`
+```css
+body {
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 0 10px;
+  font-size: 18px;
+  line-height: 1.6;
+  font-family: "Noto Sans";
+  color: #333;
+}
+h1, h2, h3 {
+  line-height: 1.2;
+}
+```
+
+---
+
+Usamos `url_for` no template, defimos `static` e o nome do arquivo para linkar.
+
+`base.html`
+```html
+<head>
+  . . .
+
+  <link rel="stylesheet"
+   href="{{ url_for('static', filename='css/main.css') }}"
+  >
+</head>
+```
+
+> Note que é usado **aspas duplas** fora e **aspas simples** por dentro.
+
 ---
 
 ### Variáveis
@@ -443,46 +483,6 @@ def cadastrar_jogo():
     else:
         return render_template("cadastrar_jogo.html")
 ```
-
----
-
-### Arquivos Estáticos
-
-Para implementar CSS e outros arquivos no Flask, adicionamos eles ao diretório `static/`.
-
-`static/css/main.css`
-```css
-body {
-  max-width: 650px;
-  margin: 40px auto;
-  padding: 0 10px;
-  font-size: 18px;
-  line-height: 1.6;
-  font-family: "Noto Sans";
-  color: #333;
-}
-h1, h2, h3 {
-  line-height: 1.2;
-}
-```
-
----
-
-Usamos `url_for` no template, defimos `static` e o nome do arquivo para linkar.
-
-`base.html`
-```html
-<head>
-  . . .
-
-  <link rel="stylesheet"
-   href="{{ url_for('static', filename='css/main.css') }}"
-  >
-</head>
-```
-
-> Note que é usado **aspas duplas** fora e **aspas simples** por dentro.
-
 ---
 
 # Incrementando o Projeto
