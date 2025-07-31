@@ -1,6 +1,6 @@
 # Minicursos
 
-Esse repósitorio é para disponibilização dos materiais e contéudos referentes aos minicuros ministrados por [Ana Barbosa](https://github.com/dvanael) e [Colaboradores](#colaboradores). 
+Esse repositório é para disponibilização dos materiais e contéudos referentes aos minicuros ministrados por [Ana Barbosa](https://github.com/dvanael) e [Colaboradores](#colaboradores). 
 
 ## Sobre o Material
 
